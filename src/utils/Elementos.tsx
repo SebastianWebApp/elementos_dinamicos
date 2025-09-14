@@ -511,13 +511,10 @@ export function ImageComponent(props: Props) {
             src={URL.createObjectURL(image)}
             alt="Vista previa"
             className="mt-2 rounded shadow"
-            style={{ maxWidth: "300px", maxHeight: "300px" }}
+            style={{ width: "100%" }}
           />
         ) : (
-          <div
-            className="flex items-center justify-center bg-gray-200 text-gray-600 rounded shadow"
-            style={{ width: "300px", height: "300px" }}
-          >
+          <div className="flex items-center justify-center bg-gray-200 text-gray-600 rounded shadow">
             📷 Subir imagen
           </div>
         )}

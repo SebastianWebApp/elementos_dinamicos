@@ -114,9 +114,4 @@ graph TD
   Z[eslint.config.js]
   AA[.gitignore]
 
-
-
-## Licencia
-
-MIT
 ```

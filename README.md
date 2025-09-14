@@ -1,69 +1,111 @@
-# React + TypeScript + Vite
+# Prueba Elementos
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Descripción
 
-Currently, two official plugins are available:
+Aplicación React + TypeScript + Vite para construir formularios dinámicos con filas y columnas personalizables.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Estructura del Proyecto
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+├── public/
+│   └── vite.svg
+├── src/
+│   ├── App.tsx
+│   ├── App.css
+│   ├── index.css
+│   ├── main.tsx
+│   ├── vite-env.d.ts
+│   ├── assets/
+│   │   └── react.svg
+│   ├── components/
+│   │   ├── Crear_Columna.tsx
+│   │   ├── Crear_Fila.tsx
+│   │   └── Menu.tsx
+│   └── utils/
+│       ├── Elementos.tsx
+│       ├── Inputs.tsx
+│       ├── ResizableCol.tsx
+│       └── Validaciones.tsx
+├── index.html
+├── package.json
+├── tsconfig.json
+├── tsconfig.app.json
+├── tsconfig.node.json
+├── vite.config.ts
+├── eslint.config.js
+└── .gitignore
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Instalación
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```sh
+npm install
 ```
+
+## Scripts
+
+- `npm run dev` — Inicia el servidor de desarrollo.
+- `npm run build` — Compila el proyecto para producción.
+- `npm run preview` — Previsualiza el build de producción.
+- `npm run lint` — Ejecuta ESLint.
+
+## Uso
+
+1. Ejecuta `npm run dev`.
+2. Accede a la aplicación en tu navegador.
+3. Usa el panel para agregar filas y columnas, configurar tipos de campo y visualizar el resultado.
+4. Puedes guardar y cargar la configuración en formato JSON.
+
+## Tecnologías
+
+- React 19
+- TypeScript
+- Vite
+- TailwindCSS
+- Font Awesome
+
+## Estructura de Componentes
+
+- [`Menu`](src/components/Menu.tsx): Panel principal y lógica de filas/columnas.
+- [`Crear_Fila`](src/components/Crear_Fila.tsx): Renderiza una fila con columnas.
+- [`Crear_Columna`](src/components/Crear_Columna.tsx): Renderiza el tipo de campo de cada columna.
+- [`Elementos`](src/utils/Elementos.tsx): Componentes para cada tipo de campo (texto, input, select, checkbox, radio, imagen).
+- [`ResizableCol`](src/utils/ResizableCol.tsx): Permite redimensionar columnas.
+- [`Inputs`](src/utils/Inputs.tsx): Inputs personalizados y validaciones.
+- [`Validaciones`](src/utils/Validaciones.tsx): Funciones de validación.
+
+## Personalización
+
+- Modifica [`App.css`](src/App.css) y [`index.css`](src/index.css) para cambiar estilos.
+- Puedes agregar nuevos tipos de campo en [`Elementos.tsx`](src/utils/Elementos.tsx).
+
+graph TD
+A[public/] --> B[vite.svg]
+C[src/] --> D[App.tsx]
+C --> E[App.css]
+C --> F[index.css]
+C --> G[main.tsx]
+C --> H[vite-env.d.ts]
+C --> I[assets/]
+I --> J[react.svg]
+C --> K[components/]
+K --> L[Crear_Columna.tsx]
+K --> M[Crear_Fila.tsx]
+K --> N[Menu.tsx]
+C --> O[utils/]
+O --> P[Elementos.tsx]
+O --> Q[Inputs.tsx]
+O --> R[ResizableCol.tsx]
+O --> S[Validaciones.tsx]
+T[index.html]
+U[package.json]
+V[tsconfig.json]
+W[tsconfig.app.json]
+X[tsconfig.node.json]
+Y[vite.config.ts]
+Z[eslint.config.js]
+AA[.gitignore]
+
+## Licencia
+
+MIT

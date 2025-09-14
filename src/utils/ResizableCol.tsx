@@ -143,18 +143,7 @@ export const ResizableCol = ({
         >
           {children}
           {indexCols !== numCols - 1 && (
-            <div
-              onMouseDown={handleMouseDown}
-              style={{
-                position: "absolute",
-                top: 0,
-                right: 0,
-                width: "5px",
-                height: "100%",
-                cursor: "col-resize",
-                background: "transparent",
-              }}
-            />
+            <div onMouseDown={handleMouseDown} className="resize-handle" />
           )}
         </div>
       )}

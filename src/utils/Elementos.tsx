@@ -256,6 +256,7 @@ export function SelectComponent(props: Props) {
                 .map((opt) => opt.trim());
               handleOptions(inputOptions);
             }}
+            value={options.join(";")} // aquí unimos el arreglo con ;
           />
 
           <h2>Resultado</h2>
@@ -339,17 +340,18 @@ export function CheckboxComponent(props: Props) {
       {lista.map((_, index) => (
         <div className="checkbox-radio-container" key={index}>
           <input type="checkbox" className="mt-2" />
-          <input
-            type="text"
-            placeholder="Etiqueta del checkbox..."
-            className={`border rounded-md p-2 flex-1 ${alignment} ${size}`}
+
+          <textarea
+            className={`custom-textarea mt-2 ${alignment} ${size}`}
+            style={{ height: "100px" }}
+            placeholder="Escribe aquí..."
             onChange={(e) => {
               const newList = [...lista];
               newList[index] = e.currentTarget.value;
               handleLista(newList);
             }}
             value={lista[index]}
-          ></input>
+          />
 
           {!preview && (
             <>
@@ -439,17 +441,18 @@ export function RadioComponent(props: Props) {
       {lista.map((_, index) => (
         <div className="checkbox-radio-container" key={index}>
           <input type="radio" className="mt-2" name={`radio-group-${name}`} />
-          <input
-            type="text"
-            placeholder="Etiqueta del radio..."
-            className={`border rounded-md p-2 flex-1 ${alignment} ${size}`}
+
+          <textarea
+            className={`custom-textarea mt-2 ${alignment} ${size}`}
+            style={{ height: "100px" }}
+            placeholder="Escribe aquí..."
             onChange={(e) => {
               const newList = [...lista];
               newList[index] = e.currentTarget.value;
               handleLista(newList);
             }}
             value={lista[index]}
-          ></input>
+          />
 
           {!preview && (
             <>

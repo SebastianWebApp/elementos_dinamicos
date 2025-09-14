@@ -250,20 +250,20 @@ body {
   background: #f3f4f6;
 }
 
+/* styles.css */
 .resize-handle {
   position: absolute;
-  right: -5px;
   top: 0;
+  right: 0;
+  width: 5px;
   height: 100%;
-  width: 10px;
-  background: #1e40af;
   cursor: col-resize;
+  background: #1e40af;
   z-index: 10;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
-.saved-table td:hover .resize-handle,
 .resize-handle:hover {
   opacity: 1;
 }

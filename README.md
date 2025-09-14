@@ -79,33 +79,43 @@ npm install
 - Modifica [`App.css`](src/App.css) y [`index.css`](src/index.css) para cambiar estilos.
 - Puedes agregar nuevos tipos de campo en [`Elementos.tsx`](src/utils/Elementos.tsx).
 
+# 📂 Estructura del Proyecto
+
+```mermaid
 graph TD
-A[public/] --> B[vite.svg]
-C[src/] --> D[App.tsx]
-C --> E[App.css]
-C --> F[index.css]
-C --> G[main.tsx]
-C --> H[vite-env.d.ts]
-C --> I[assets/]
-I --> J[react.svg]
-C --> K[components/]
-K --> L[Crear_Columna.tsx]
-K --> M[Crear_Fila.tsx]
-K --> N[Menu.tsx]
-C --> O[utils/]
-O --> P[Elementos.tsx]
-O --> Q[Inputs.tsx]
-O --> R[ResizableCol.tsx]
-O --> S[Validaciones.tsx]
-T[index.html]
-U[package.json]
-V[tsconfig.json]
-W[tsconfig.app.json]
-X[tsconfig.node.json]
-Y[vite.config.ts]
-Z[eslint.config.js]
-AA[.gitignore]
+  A[public/] --> B[vite.svg]
+
+  C[src/] --> D[App.tsx]
+  C --> E[App.css]
+  C --> F[index.css]
+  C --> G[main.tsx]
+  C --> H[vite-env.d.ts]
+
+  C --> I[assets/]
+  I --> J[react.svg]
+
+  C --> K[components/]
+  K --> L[Crear_Columna.tsx]
+  K --> M[Crear_Fila.tsx]
+  K --> N[Menu.tsx]
+
+  C --> O[utils/]
+  O --> P[Elementos.tsx]
+  O --> Q[Inputs.tsx]
+  O --> R[ResizableCol.tsx]
+  O --> S[Validaciones.tsx]
+
+  T[index.html]
+  U[package.json]
+  V[tsconfig.json]
+  W[tsconfig.app.json]
+  X[tsconfig.node.json]
+  Y[vite.config.ts]
+  Z[eslint.config.js]
+  AA[.gitignore]
+
 
 ## Licencia
 
 MIT
+```

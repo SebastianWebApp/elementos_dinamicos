@@ -69,7 +69,7 @@ body {
   border-radius: 8px;
   padding: 1.75rem;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-  width: 1000px;
+  width: 1200px;
 }
 
 .row-container {
@@ -95,7 +95,6 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-  padding: 0.75rem;
 }
 
 .row-container .flex:not(:last-child)::after {
@@ -125,6 +124,25 @@ body {
 
 .delete-row-btn:hover {
   background: #dc2626;
+}
+
+.copy-row-btn {
+  position: absolute;
+  top: 0.75rem;
+  right: 8rem;
+  background: #446fef;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background 0.3s ease;
+}
+
+.copy-row-btn:hover {
+  background: #3e6aec;
 }
 
 .custom-select,

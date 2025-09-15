@@ -53,7 +53,10 @@ export function TextoComponent(props: Props) {
     setTextValue(valor);
     configuracion?.("texto", alignment, size, valor, "", [], null);
   };
+  const urlRegex = /(https?:\/\/[^\s]+)/g;
 
+  // Dividir texto en trozos (texto normal y links)
+  const parts = textValue.split(urlRegex);
   return (
     <div className="flex flex-col gap-2">
       {!preview && (
@@ -93,7 +96,21 @@ export function TextoComponent(props: Props) {
       )}
 
       <p className={`${alignment} ${size}`} style={{ whiteSpace: "pre-wrap" }}>
-        {textValue}
+        {parts.map((part, index) =>
+          urlRegex.test(part) ? (
+            <a
+              key={index}
+              href={part}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "blue", textDecoration: "underline" }}
+            >
+              {part}
+            </a>
+          ) : (
+            part
+          )
+        )}
       </p>
     </div>
   );

@@ -19,6 +19,7 @@ type Props = {
   preview: boolean;
   configuraciones: ColumnaConfig[];
   eliminar_fila?: (id: number) => void;
+  duplicar_fila?: (id: number) => void;
   configuracion?: (
     id?: number,
     colIndex?: number,
@@ -62,17 +63,26 @@ function Crear_Fila(props: Props) {
               padding: "0px",
               marginBottom: "0px",
               gap: "0px",
+              border: "none",
             }
-          : {}
+          : { overflowX: "auto" }
       }
     >
       {!preview && (
-        <button
-          className="delete-row-btn"
-          onClick={() => props.eliminar_fila?.(id)}
-        >
-          <i className="fas fa-trash"></i> Eliminar
-        </button>
+        <>
+          <button
+            className="copy-row-btn"
+            onClick={() => props.duplicar_fila?.(id)}
+          >
+            <i className="fas fa-clone"></i> Duplicar
+          </button>
+          <button
+            className="delete-row-btn"
+            onClick={() => props.eliminar_fila?.(id)}
+          >
+            <i className="fas fa-trash"></i> Eliminar
+          </button>
+        </>
       )}
 
       {Array.from({ length: numCols }).map((_, index) => (

@@ -29,12 +29,12 @@ function Menu() {
   const panelRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const endRef = useRef<HTMLDivElement | null>(null);
-  const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth > 1000); // 👈 estado para tamaño de pantalla
+  const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth > 1200); // 👈 estado para tamaño de pantalla
 
   // Detectar resize
   useEffect(() => {
     const handleResize = () => {
-      setIsLargeScreen(window.innerWidth > 1000);
+      setIsLargeScreen(window.innerWidth > 1200);
     };
 
     window.addEventListener("resize", handleResize);
@@ -138,6 +138,27 @@ function Menu() {
     setFilas(filas.filter((fila) => fila.id !== id));
   };
 
+  const duplicar_fila = (id: number) => {
+    setFilas((prevFilas) => {
+      const index = prevFilas.findIndex((fila) => fila.id === id);
+      if (index === -1) return prevFilas;
+
+      const filaOriginal = prevFilas[index];
+      const filaDuplicada = {
+        ...filaOriginal,
+        id: Date.now(), // nuevo id único
+      };
+
+      // Insertar la duplicada justo después de la original
+      const nuevasFilas = [
+        ...prevFilas.slice(0, index + 1),
+        filaDuplicada,
+        ...prevFilas.slice(index + 1),
+      ];
+      return nuevasFilas;
+    });
+  };
+
   const handleDescargar = () => {
     // Clonar las filas y limpiar el valor de file si es image
     const filasLimpias = filas.map((fila) => ({
@@ -220,7 +241,7 @@ function Menu() {
           </h1>
           <p className="text-gray-600 text-lg">
             Para usar la aplicación correctamente, por favor accede desde una
-            pantalla mayor a 1000px de ancho.
+            pantalla mayor a 1200px de ancho.
           </p>
         </div>
       ) : (
@@ -353,6 +374,7 @@ function Menu() {
                                 eliminar_fila={eliminar_fila}
                                 preview={visualizar}
                                 configuracion={handleConfiguracion}
+                                duplicar_fila={duplicar_fila}
                                 configuracion_columna={
                                   handleConfiguracion_Columnas
                                 }
@@ -376,7 +398,6 @@ function Menu() {
                     id={fila.id}
                     numCols={fila.cols}
                     configuraciones={fila.configuracion}
-                    eliminar_fila={eliminar_fila}
                     preview={visualizar}
                     configuracion={handleConfiguracion}
                     configuracion_columna={handleConfiguracion_Columnas}

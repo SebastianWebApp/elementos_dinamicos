@@ -1,4 +1,7 @@
 import { useState, useRef, useEffect } from "react";
+import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
+import type { DropResult } from "@hello-pangea/dnd";
+
 import Crear_Fila from "./Crear_Fila";
 
 type ColumnaConfig = {
@@ -191,6 +194,19 @@ function Menu() {
     };
   }, []);
 
+  // 🔹 Reordenar filas al hacer drag
+  const onDragEnd = (result: DropResult) => {
+    const { source, destination } = result;
+    if (!destination) return;
+
+    setFilas((prevFilas) => {
+      const items = Array.from(prevFilas);
+      const [moved] = items.splice(source.index, 1);
+      items.splice(destination.index, 0, moved);
+      return items;
+    });
+  };
+
   return (
     <>
       {!isLargeScreen ? (
@@ -304,23 +320,71 @@ function Menu() {
             </div>
           </div>
 
-          {/* Contenido principal */}
-          <div className="dashboard-container mt-6">
-            <div className="preview-card" ref={endRef}>
-              {filas.map((fila) => (
-                <Crear_Fila
-                  key={fila.id}
-                  id={fila.id}
-                  numCols={fila.cols}
-                  configuraciones={fila.configuracion}
-                  eliminar_fila={eliminar_fila}
-                  preview={visualizar}
-                  configuracion={handleConfiguracion}
-                  configuracion_columna={handleConfiguracion_Columnas}
-                />
-              ))}
+          {!visualizar ? (
+            <div className="dashboard-container mt-6">
+              <DragDropContext onDragEnd={onDragEnd}>
+                <Droppable droppableId="filas">
+                  {(provided) => (
+                    <div
+                      className="preview-card"
+                      ref={(el) => {
+                        provided.innerRef(el);
+                        endRef.current = el;
+                      }}
+                      {...provided.droppableProps}
+                    >
+                      {filas.map((fila, index) => (
+                        <Draggable
+                          key={fila.id}
+                          draggableId={fila.id.toString()}
+                          index={index}
+                        >
+                          {(provided) => (
+                            <div
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                            >
+                              <Crear_Fila
+                                key={fila.id}
+                                id={fila.id}
+                                numCols={fila.cols}
+                                configuraciones={fila.configuracion}
+                                eliminar_fila={eliminar_fila}
+                                preview={visualizar}
+                                configuracion={handleConfiguracion}
+                                configuracion_columna={
+                                  handleConfiguracion_Columnas
+                                }
+                              />
+                            </div>
+                          )}
+                        </Draggable>
+                      ))}
+                      {provided.placeholder}
+                    </div>
+                  )}
+                </Droppable>
+              </DragDropContext>
             </div>
-          </div>
+          ) : (
+            <div className="dashboard-container mt-6">
+              <div className="preview-card" ref={endRef}>
+                {filas.map((fila) => (
+                  <Crear_Fila
+                    key={fila.id}
+                    id={fila.id}
+                    numCols={fila.cols}
+                    configuraciones={fila.configuracion}
+                    eliminar_fila={eliminar_fila}
+                    preview={visualizar}
+                    configuracion={handleConfiguracion}
+                    configuracion_columna={handleConfiguracion_Columnas}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       )}
     </>

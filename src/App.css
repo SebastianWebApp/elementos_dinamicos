@@ -276,7 +276,7 @@ body {
   width: 5px;
   height: 100%;
   cursor: col-resize;
-  background: #1e40af;
+  background: #4058a8;
   z-index: 10;
   opacity: 0;
   transition: opacity 0.3s ease;

@@ -9,6 +9,12 @@ type ColumnaConfig = {
   opciones?: string[];
   file?: File | null;
   width?: number;
+  color_texto?: string;
+  color_fondo?: string;
+  borde_top?: boolean;
+  borde_bottom?: boolean;
+  borde_left?: boolean;
+  borde_right?: boolean;
 };
 
 type Props = {
@@ -18,6 +24,7 @@ type Props = {
   numCols: number;
   indexCols: number;
   onWidthChange?: (width: number) => void;
+  onClickCol?: () => void;
 };
 
 export const ResizableCol = ({
@@ -27,6 +34,7 @@ export const ResizableCol = ({
   onWidthChange,
   numCols,
   indexCols,
+  onClickCol,
 }: Props) => {
   const colRef = useRef<HTMLDivElement>(null);
 
@@ -52,6 +60,11 @@ export const ResizableCol = ({
 
     let lastWidth = colRef.current.offsetWidth;
 
+    if (width === null || columnas_configuraciones.width === 0) {
+      setWidth(lastWidth);
+      onWidthChange?.(lastWidth);
+    }
+
     const handleResize = () => {
       const width = colRef.current?.offsetWidth ?? 0;
       if (width !== lastWidth) {
@@ -67,7 +80,7 @@ export const ResizableCol = ({
     handleResize();
 
     return () => resizeObserver.disconnect();
-  }, [onWidthChange]);
+  }, [width, columnas_configuraciones.width, onWidthChange]);
 
   // Mover solo si no es la última columna
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -129,16 +142,29 @@ export const ResizableCol = ({
       ) : (
         <div
           ref={colRef}
+          onClick={onClickCol}
           style={{
             width: appliedWidth,
             position: "relative",
-            border: "1px solid #ccc",
             padding: "5px",
             boxSizing: "border-box",
             display: "flex",
             flexDirection: "column",
             overflow: "hidden",
             flex: appliedWidth === "auto" ? 1 : "none",
+            background: columnas_configuraciones.color_fondo,
+            borderTop: columnas_configuraciones.borde_top
+              ? "1px solid #ccc"
+              : "none",
+            borderBottom: columnas_configuraciones.borde_bottom
+              ? "1px solid #ccc"
+              : "none",
+            borderLeft: columnas_configuraciones.borde_left
+              ? "1px solid #ccc"
+              : "none",
+            borderRight: columnas_configuraciones.borde_right
+              ? "1px solid #ccc"
+              : "none",
           }}
         >
           {children}

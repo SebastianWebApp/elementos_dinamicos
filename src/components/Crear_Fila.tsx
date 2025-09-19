@@ -11,6 +11,12 @@ type ColumnaConfig = {
   opciones?: string[];
   file?: File | null;
   width?: number;
+  color_texto?: string;
+  color_fondo?: string;
+  borde_top?: boolean;
+  borde_bottom?: boolean;
+  borde_left?: boolean;
+  borde_right?: boolean;
 };
 
 type Props = {
@@ -20,6 +26,7 @@ type Props = {
   configuraciones: ColumnaConfig[];
   eliminar_fila?: (id: number) => void;
   duplicar_fila?: (id: number) => void;
+  onSelect?: (id: number, index: number) => void;
   configuracion?: (
     id?: number,
     colIndex?: number,
@@ -47,10 +54,15 @@ function Crear_Fila(props: Props) {
     configuracion,
     configuracion_columna,
     configuraciones,
+    onSelect,
   } = props;
 
   const handleWidth = (width: number, id: number, index: number) => {
     configuracion_columna?.(id, index, width);
+  };
+
+  const handleCopiar_Width = (id: number, index: number) => {
+    onSelect?.(id, index);
   };
 
   return (
@@ -93,6 +105,7 @@ function Crear_Fila(props: Props) {
           numCols={numCols}
           indexCols={index}
           onWidthChange={(width) => handleWidth(width, id, index)}
+          onClickCol={() => handleCopiar_Width(id, index)}
         >
           <Crear_Columna
             key={`${id}_${index}`}

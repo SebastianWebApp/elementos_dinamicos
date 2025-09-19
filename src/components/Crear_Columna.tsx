@@ -17,6 +17,12 @@ type ColumnaConfig = {
   opciones?: string[];
   file?: File | null;
   width?: number;
+  color_texto?: string;
+  color_fondo?: string;
+  borde_top?: boolean;
+  borde_bottom?: boolean;
+  borde_left?: boolean;
+  borde_right?: boolean;
 };
 
 type Props = {
@@ -167,6 +173,8 @@ function Crear_Columna(props: Props) {
     }
   };
 
+  console.log(columnas_configuraciones);
+
   return (
     <div
       className="flex p-3 flex-col gap-2"
@@ -186,7 +194,7 @@ function Crear_Columna(props: Props) {
           <option value="select">Select</option>
           <option value="checkbox">Checkbox</option>
           <option value="radio">Radio</option>
-          <option value="image">Imagen</option>
+          {/* <option value="image">Imagen</option> */}
         </select>
       )}
 

@@ -10,6 +10,12 @@ type ColumnaConfig = {
   opciones?: string[];
   file?: File | null;
   width?: number;
+  color_texto?: string;
+  color_fondo?: string;
+  borde_top?: boolean;
+  borde_bottom?: boolean;
+  borde_left?: boolean;
+  borde_right?: boolean;
 };
 
 type Props = {
@@ -95,7 +101,13 @@ export function TextoComponent(props: Props) {
         </>
       )}
 
-      <p className={`${alignment} ${size}`} style={{ whiteSpace: "pre-wrap" }}>
+      <p
+        className={`${alignment} ${size}`}
+        style={{
+          whiteSpace: "pre-wrap",
+          color: elementos_configuraciones.color_texto,
+        }}
+      >
         {parts.map((part, index) =>
           urlRegex.test(part) ? (
             <a
@@ -147,15 +159,45 @@ export function InputComponent(props: Props) {
   const renderInputByType = () => {
     switch (dataType) {
       case "texto_general":
-        return <TextArea size={size} alignment={alignment} />;
+        return (
+          <TextArea
+            size={size}
+            alignment={alignment}
+            color_texto={elementos_configuraciones.color_texto}
+          />
+        );
       case "only_letters":
-        return <SoloLetras size={size} alignment={alignment} />;
+        return (
+          <SoloLetras
+            size={size}
+            alignment={alignment}
+            color_texto={elementos_configuraciones.color_texto}
+          />
+        );
       case "numeric_no_decimal":
-        return <SoloNumeros size={size} alignment={alignment} />;
+        return (
+          <SoloNumeros
+            size={size}
+            alignment={alignment}
+            color_texto={elementos_configuraciones.color_texto}
+          />
+        );
       case "numeric_with_decimal":
-        return <ConDecimal size={size} alignment={alignment} />;
+        return (
+          <ConDecimal
+            size={size}
+            alignment={alignment}
+            color_texto={elementos_configuraciones.color_texto}
+          />
+        );
       case "date":
-        return <Fecha size={size} alignment={alignment} />;
+        return (
+          <Fecha
+            size={size}
+            alignment={alignment}
+            color_texto={elementos_configuraciones.color_texto}
+          />
+        );
     }
   };
 
@@ -279,7 +321,10 @@ export function SelectComponent(props: Props) {
           <h2>Resultado</h2>
         </>
       )}
-      <select className={`border rounded-md p-2 mt-2 ${alignment} ${size}`}>
+      <select
+        className={`border rounded-md p-2 mt-2 ${alignment} ${size}`}
+        style={{ color: elementos_configuraciones.color_texto }}
+      >
         {options.map((opt, index) => (
           <option key={index} value={opt}>
             {opt}
@@ -360,7 +405,10 @@ export function CheckboxComponent(props: Props) {
 
           <textarea
             className={`custom-textarea mt-2 ${alignment} ${size}`}
-            style={{ height: "100px" }}
+            style={{
+              height: "100px",
+              color: elementos_configuraciones.color_texto,
+            }}
             placeholder="Escribe aquí..."
             onChange={(e) => {
               const newList = [...lista];
@@ -461,7 +509,10 @@ export function RadioComponent(props: Props) {
 
           <textarea
             className={`custom-textarea mt-2 ${alignment} ${size}`}
-            style={{ height: "100px" }}
+            style={{
+              height: "100px",
+              color: elementos_configuraciones.color_texto,
+            }}
             placeholder="Escribe aquí..."
             onChange={(e) => {
               const newList = [...lista];

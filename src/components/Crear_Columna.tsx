@@ -173,8 +173,6 @@ function Crear_Columna(props: Props) {
     }
   };
 
-  console.log(columnas_configuraciones);
-
   return (
     <div
       className="flex p-3 flex-col gap-2"

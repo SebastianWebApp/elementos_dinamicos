@@ -310,9 +310,7 @@ export function SelectComponent(props: Props) {
             placeholder="Ingresa opciones separadas por punto y coma..."
             className="border rounded-md p-2 mt-2"
             onChange={(e) => {
-              const inputOptions = e.currentTarget.value
-                .split(";")
-                .map((opt) => opt.trim());
+              const inputOptions = e.currentTarget.value.split(";");
               handleOptions(inputOptions);
             }}
             value={options.join(";")} // aquí unimos el arreglo con ;
